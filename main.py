@@ -173,7 +173,7 @@ def run_pretrained():
         )
 
         # 5. INFERENCE LOOP
-        for i in range(500):
+        for i in range(1000):
             # 5a. Prepare raw observation
             image_raw_hwc = obs["pixels"]["top"].astype(np.float32) / 255.0
             # Get the agent's current joint positions (qpos)
@@ -249,14 +249,14 @@ def run_pretrained():
             rgb_array = env.render()
             frames.append(rgb_array)
 
-            if terminated or truncated:
-                print(f"Episode finished after {i + 1} steps.")
-                break
+            # if terminated or truncated:
+            #     print(f"Episode finished after {i + 1} steps.")
+            #     break
 
         # 6. Save video and cleanup
         if frames:
             print("Saving video...")
-            imageio.mimsave(f"aloha_inference_{e}.mp4", frames, fps=30)
+            imageio.mimsave(f"aloha_inference_{e}.mp4", frames, fps=60)
 
         env.close()
 
